@@ -192,6 +192,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
+<link rel='stylesheet' type='text/css' href='css/site.css' />
 </head>
 <body>
 <div id="preamble" class="status">
@@ -233,9 +234,9 @@
 Весь код проекта доступен в <a href="https://github.com/nrukin/fastapi-win-service-example">на GitHub</a>.
 </p>
 
-<div id="outline-container-org107f7f5" class="outline-2">
-<h2 id="org107f7f5">Подготовка</h2>
-<div class="outline-text-2" id="text-org107f7f5">
+<div id="outline-container-orga4f1cbc" class="outline-2">
+<h2 id="orga4f1cbc">Подготовка</h2>
+<div class="outline-text-2" id="text-orga4f1cbc">
 <p>
 Создаем папку проекта, виртуальное окружение, устанавливаем зависимости.
 </p>
@@ -251,9 +252,9 @@ pip install pyinstaller fastapi pywin32 <span style="font-style: italic;">"uvico
 </div>
 </div>
 </div>
-<div id="outline-container-orgfc20328" class="outline-2">
-<h2 id="orgfc20328">Простой app</h2>
-<div class="outline-text-2" id="text-orgfc20328">
+<div id="outline-container-org43f8a55" class="outline-2">
+<h2 id="org43f8a55">Простой app</h2>
+<div class="outline-text-2" id="text-org43f8a55">
 <p>
 Пишем сервис. Код примитивный: слушаем адрес <code>generate_uuid</code>,
 при входящем запросе генерируем uuid - столько сколько запросили.
@@ -290,13 +291,13 @@ pip install pyinstaller fastapi pywin32 <span style="font-style: italic;">"uvico
 </div>
 </div>
 
-<div id="outline-container-org30f4edf" class="outline-2">
-<h2 id="org30f4edf">Усложняем</h2>
-<div class="outline-text-2" id="text-org30f4edf">
+<div id="outline-container-orgea049b4" class="outline-2">
+<h2 id="orgea049b4">Усложняем</h2>
+<div class="outline-text-2" id="text-orgea049b4">
 </div>
-<div id="outline-container-orgaf48a16" class="outline-3">
-<h3 id="orgaf48a16">Файл main.py</h3>
-<div class="outline-text-3" id="text-orgaf48a16">
+<div id="outline-container-orgefe6eb8" class="outline-3">
+<h3 id="orgefe6eb8">Файл main.py</h3>
+<div class="outline-text-3" id="text-orgefe6eb8">
 <p>
 Слегка усложним код, заодно победим пару проблем:
 </p>
@@ -372,9 +373,9 @@ pip install pyinstaller fastapi pywin32 <span style="font-style: italic;">"uvico
 </div>
 </div>
 
-<div id="outline-container-org0f3a91c" class="outline-3">
-<h3 id="org0f3a91c">Файл service.py</h3>
-<div class="outline-text-3" id="text-org0f3a91c">
+<div id="outline-container-org2ac45b4" class="outline-3">
+<h3 id="org2ac45b4">Файл service.py</h3>
+<div class="outline-text-3" id="text-org2ac45b4">
 <p>
 Этот файл нужен нам для того чтобы наш app работал в режиме Windows-службы, здесь мы:
 </p>
@@ -439,9 +440,9 @@ pip install pyinstaller fastapi pywin32 <span style="font-style: italic;">"uvico
 </div>
 </div>
 
-<div id="outline-container-orgc0c595d" class="outline-2">
-<h2 id="orgc0c595d">Сборка exe</h2>
-<div class="outline-text-2" id="text-orgc0c595d">
+<div id="outline-container-orgbe9af6f" class="outline-2">
+<h2 id="orgbe9af6f">Сборка exe</h2>
+<div class="outline-text-2" id="text-orgbe9af6f">
 <p>
 Для сборки в exe вызовем установленный pyinstaller:
 </p>
@@ -456,9 +457,9 @@ pip install pyinstaller fastapi pywin32 <span style="font-style: italic;">"uvico
 </div>
 </div>
 
-<div id="outline-container-orgf5bc1bd" class="outline-2">
-<h2 id="orgf5bc1bd">Установка сервиса</h2>
-<div class="outline-text-2" id="text-orgf5bc1bd">
+<div id="outline-container-orga061eef" class="outline-2">
+<h2 id="orga061eef">Установка сервиса</h2>
+<div class="outline-text-2" id="text-orga061eef">
 <p>
 Устанавливаем службу
 </p>

@@ -192,6 +192,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
+<link rel='stylesheet' type='text/css' href='css/site.css' />
 </head>
 <body>
 <div id="preamble" class="status">
@@ -220,18 +221,18 @@
 удобный пакет для работы с RSS внутри emacs.
 </p>
 
-<div id="outline-container-orgeecaca1" class="outline-2">
-<h2 id="orgeecaca1">Установка</h2>
-<div class="outline-text-2" id="text-orgeecaca1">
+<div id="outline-container-org7db3ace" class="outline-2">
+<h2 id="org7db3ace">Установка</h2>
+<div class="outline-text-2" id="text-org7db3ace">
 <p>
 Для установки и настройки пакетов я использую <code>use-package</code>
 т.к. он позволяет выполнить настройку в одном месте в коде
 и в одной команде.
 </p>
 </div>
-<div id="outline-container-org821dd5b" class="outline-3">
-<h3 id="org821dd5b">Подключение к melpa и подключение use-package</h3>
-<div class="outline-text-3" id="text-org821dd5b">
+<div id="outline-container-org97dd4ce" class="outline-3">
+<h3 id="org97dd4ce">Подключение к melpa и подключение use-package</h3>
+<div class="outline-text-3" id="text-org97dd4ce">
 <p>
 В <code>init.el</code> добавляем код:
 </p>
@@ -258,13 +259,13 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org8925dbe" class="outline-3">
-<h3 id="org8925dbe">Простая установка и настройка elfeed</h3>
-<div class="outline-text-3" id="text-org8925dbe">
+<div id="outline-container-orgcedc377" class="outline-3">
+<h3 id="orgcedc377">Простая установка и настройка elfeed</h3>
+<div class="outline-text-3" id="text-orgcedc377">
 </div>
-<div id="outline-container-orgedd2a86" class="outline-4">
-<h4 id="orgedd2a86">Проверка работы под Windows</h4>
-<div class="outline-text-4" id="text-orgedd2a86">
+<div id="outline-container-orgb8c5a3e" class="outline-4">
+<h4 id="orgb8c5a3e">Проверка работы под Windows</h4>
+<div class="outline-text-4" id="text-orgb8c5a3e">
 <p>
 Перед настройкой elfeed не помешает определить - не работаем
 ли мы сейчас под Windows, т.к. в этой ОС будет нужно
@@ -276,9 +277,9 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgd849c5d" class="outline-4">
-<h4 id="orgd849c5d">Подключение elfeed через use-package</h4>
-<div class="outline-text-4" id="text-orgd849c5d">
+<div id="outline-container-org0767bfc" class="outline-4">
+<h4 id="org0767bfc">Подключение elfeed через use-package</h4>
+<div class="outline-text-4" id="text-org0767bfc">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> elfeed
   <span style="font-weight: bold;">:bind</span> (<span style="font-style: italic;">"C-x w"</span> . elfeed)
@@ -307,9 +308,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgfd7f444" class="outline-2">
-<h2 id="orgfd7f444">Настройка подписок</h2>
-<div class="outline-text-2" id="text-orgfd7f444">
+<div id="outline-container-org95163b0" class="outline-2">
+<h2 id="org95163b0">Настройка подписок</h2>
+<div class="outline-text-2" id="text-org95163b0">
 <p>
 Самый простой способ настройки подписок - использование пакета <code>elfeed-org</code>.
 Он позволяет перечислить список подписок внутри файла в формате org.
@@ -372,13 +373,13 @@
 </div>
 </div>
 
-<div id="outline-container-orgdac269d" class="outline-2">
-<h2 id="orgdac269d">Небольшие правки</h2>
-<div class="outline-text-2" id="text-orgdac269d">
+<div id="outline-container-org2a1e398" class="outline-2">
+<h2 id="org2a1e398">Небольшие правки</h2>
+<div class="outline-text-2" id="text-org2a1e398">
 </div>
-<div id="outline-container-orge949bc0" class="outline-3">
-<h3 id="orge949bc0">Раскрашивание тегов</h3>
-<div class="outline-text-3" id="text-orge949bc0">
+<div id="outline-container-org3bd3a23" class="outline-3">
+<h3 id="org3bd3a23">Раскрашивание тегов</h3>
+<div class="outline-text-3" id="text-org3bd3a23">
 <p>
 Я хочу чтобы разные теги в списке отображались по разному.
 </p>
@@ -474,9 +475,9 @@ org-файл в исполняемый файл el и запускать его,
 </div>
 </div>
 
-<div id="outline-container-orgd06c5e5" class="outline-3">
-<h3 id="orgd06c5e5">Оформление</h3>
-<div class="outline-text-3" id="text-orgd06c5e5">
+<div id="outline-container-orgc613b96" class="outline-3">
+<h3 id="orgc613b96">Оформление</h3>
+<div class="outline-text-3" id="text-orgc613b96">
 <p>
 Просто маленькое украшение:
 </p>
@@ -500,13 +501,13 @@ org-файл в исполняемый файл el и запускать его,
 </div>
 </div>
 
-<div id="outline-container-orgc2d8a8f" class="outline-2">
-<h2 id="orgc2d8a8f">Итоговые файлы</h2>
-<div class="outline-text-2" id="text-orgc2d8a8f">
+<div id="outline-container-org2085fd4" class="outline-2">
+<h2 id="org2085fd4">Итоговые файлы</h2>
+<div class="outline-text-2" id="text-org2085fd4">
 </div>
-<div id="outline-container-org480b6d4" class="outline-3">
-<h3 id="org480b6d4">init.el</h3>
-<div class="outline-text-3" id="text-org480b6d4">
+<div id="outline-container-org3e6a6ea" class="outline-3">
+<h3 id="org3e6a6ea">init.el</h3>
+<div class="outline-text-3" id="text-org3e6a6ea">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">package</span>)
 (add-to-list 'package-archives '(<span style="font-style: italic;">"melpa"</span> . <span style="font-style: italic;">"https://melpa.org/packages/"</span>) t)
@@ -540,9 +541,9 @@ org-файл в исполняемый файл el и запускать его,
 </div>
 </div>
 </div>
-<div id="outline-container-org593f953" class="outline-3">
-<h3 id="org593f953">elfeed.org</h3>
-<div class="outline-text-3" id="text-org593f953">
+<div id="outline-container-org10c0a27" class="outline-3">
+<h3 id="org10c0a27">elfeed.org</h3>
+<div class="outline-text-3" id="text-org10c0a27">
 <div class="org-src-container">
 <pre class="src src-org"><span style="font-weight: bold;">* Feeds                                                    </span><span style="font-weight: bold;">:elfeed:</span>
 <span style="font-weight: bold; font-style: italic;">** </span><span style="font-weight: bold; font-style: italic; text-decoration: underline;"><a href="https://habr.com/ru/rss/best/daily/?fl=ru">&#1061;&#1072;&#1073;</a><a href="https://habr.com/ru/rss/best/daily/?fl=ru">&#1088;</a></span><span style="font-weight: bold; font-style: italic;">       </span><span style="font-weight: bold; font-style: italic;">:habr:</span>
@@ -580,9 +581,9 @@ org-файл в исполняемый файл el и запускать его,
 </div>
 </div>
 
-<div id="outline-container-org8b631d1" class="outline-2">
-<h2 id="org8b631d1">Шпаргалка по сочетаниям клавиш</h2>
-<div class="outline-text-2" id="text-org8b631d1">
+<div id="outline-container-orgdfb31d7" class="outline-2">
+<h2 id="orgdfb31d7">Шпаргалка по сочетаниям клавиш</h2>
+<div class="outline-text-2" id="text-orgdfb31d7">
 <p>
 В принципе, перечисленных ниже команд должно быть достаточно чтобы пользоваться elfeed.
 Остальные можно подсмотреть по <code>C-h m</code>.

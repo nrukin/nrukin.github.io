@@ -192,6 +192,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
+<link rel='stylesheet' type='text/css' href='css/site.css' />
 </head>
 <body>
 <div id="preamble" class="status">
@@ -225,9 +226,9 @@
 Документация очень объемная и развернутая: <a href="https://www.gnu.org/software/emms/manual/">https://www.gnu.org/software/emms/manual/</a>
 </p>
 
-<div id="outline-container-org18db6b0" class="outline-2">
-<h2 id="org18db6b0">Установка и настройка</h2>
-<div class="outline-text-2" id="text-org18db6b0">
+<div id="outline-container-org0e7ad8d" class="outline-2">
+<h2 id="org0e7ad8d">Установка и настройка</h2>
+<div class="outline-text-2" id="text-org0e7ad8d">
 <p>
 В первую очередь понадобится проигрыватель <code>mpv</code> - для проигрывания интернет-радио
 он мне понравился больше чем vlc, к тому же через него прокидывается тег играющей песни.
@@ -278,9 +279,9 @@
 </div>
 </div>
 
-<div id="outline-container-org59815dc" class="outline-2">
-<h2 id="org59815dc">Плейлист</h2>
-<div class="outline-text-2" id="text-org59815dc">
+<div id="outline-container-orgb1f270d" class="outline-2">
+<h2 id="orgb1f270d">Плейлист</h2>
+<div class="outline-text-2" id="text-orgb1f270d">
 <p>
 Файл плейлиста - обычный текстовый файл содержащий код elisp (но это не принципиально).
 Главное про этот файл: первая строка файла должна быть комментарием <code>;;; This is an EMMS playlist file</code>, а список станций задаётся в формате скобок.
@@ -368,9 +369,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgbd382f3" class="outline-2">
-<h2 id="orgbd382f3">Функция форматирования</h2>
-<div class="outline-text-2" id="text-orgbd382f3">
+<div id="outline-container-org48e9dab" class="outline-2">
+<h2 id="org48e9dab">Функция форматирования</h2>
+<div class="outline-text-2" id="text-org48e9dab">
 <p>
 Я написал небольшую функцию и повесил её на обновление описания играющего трека,
 теперь радиостанция представляется как содержимое поля <code>radio</code> и представление
@@ -400,9 +401,9 @@
 </div>
 </div>
 
-<div id="outline-container-org0b50df5" class="outline-2">
-<h2 id="org0b50df5">Прослушивание музыки</h2>
-<div class="outline-text-2" id="text-org0b50df5">
+<div id="outline-container-orgdd19a83" class="outline-2">
+<h2 id="orgdd19a83">Прослушивание музыки</h2>
+<div class="outline-text-2" id="text-orgdd19a83">
 <p>
 Проигрыватель запускается в emacs по команде <code>M-x emms-streams</code> (можно назначить на какое-нибудь сочетание клавиш, я же
 просто вывел ссылку на <a href="https://github.com/emacs-dashboard/emacs-dashboard">dashboard</a>). Если всё настроено правильно: откроется список радиостанций, управление простое:

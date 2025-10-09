@@ -192,6 +192,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
+<link rel='stylesheet' type='text/css' href='css/site.css' />
 </head>
 <body>
 <div id="preamble" class="status">
@@ -259,9 +260,9 @@
 для сравнения производительности, например, разных языков программирования.
 </p>
 
-<div id="outline-container-org0a5b033" class="outline-2">
-<h2 id="org0a5b033">О тестовой машине</h2>
-<div class="outline-text-2" id="text-org0a5b033">
+<div id="outline-container-org65bb143" class="outline-2">
+<h2 id="org65bb143">О тестовой машине</h2>
+<div class="outline-text-2" id="text-org65bb143">
 <p>
 Весь код запускается на одной и той же машине, в связи с тем что здесь у нас участвует 1С, я буду использовать
 компьютер под управлением Windows на процессоре <b>AMD Ryzen 5 3500U</b>. Понятно что один и тот же тест будет 
@@ -274,13 +275,13 @@
 </p>
 </div>
 </div>
-<div id="outline-container-orgc979b26" class="outline-2">
-<h2 id="orgc979b26">1C</h2>
-<div class="outline-text-2" id="text-orgc979b26">
+<div id="outline-container-orge62586e" class="outline-2">
+<h2 id="orge62586e">1C</h2>
+<div class="outline-text-2" id="text-orge62586e">
 </div>
-<div id="outline-container-orgc7e18cb" class="outline-3">
-<h3 id="orgc7e18cb">Числа</h3>
-<div class="outline-text-3" id="text-orgc7e18cb">
+<div id="outline-container-org3429703" class="outline-3">
+<h3 id="org3429703">Числа</h3>
+<div class="outline-text-3" id="text-org3429703">
 <p>
 В первую очередь я переписал алгоритм на 1С. На этот раз я отказался от строковых конвертаций и от
 вывода результатов. Отказ от вывода значительно ускорил выполнение.
@@ -309,7 +310,7 @@
 <p>
 Результаты трех запусков
 </p>
-<pre class="example" id="orgda0b101">
+<pre class="example" id="orgfdb6e84">
 Найдено: 55 252; Время выполнения: 6,493 с
 Найдено: 55 252; Время выполнения: 7,346 с
 Найдено: 55 252; Время выполнения: 7,316 с
@@ -317,9 +318,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgc66d40a" class="outline-3">
-<h3 id="orgc66d40a">Строки</h3>
-<div class="outline-text-3" id="text-orgc66d40a">
+<div id="outline-container-org1fff742" class="outline-3">
+<h3 id="org1fff742">Строки</h3>
+<div class="outline-text-3" id="text-org1fff742">
 <p>
 Воспроизведу первый алгоритм - конвертируем число в строку, потом разбиваем строку на подстроки и обратно корвертируем в числа (ой):
 </p>
@@ -350,7 +351,7 @@
 И снова три запуска:
 </p>
 
-<pre class="example" id="org485af97">
+<pre class="example" id="org368891b">
 Найдено: 55 252; Время выполнения: 15,712 с
 Найдено: 55 252; Время выполнения: 15,557 с
 Найдено: 55 252; Время выполнения: 16,121 с
@@ -363,13 +364,13 @@
 </div>
 </div>
 
-<div id="outline-container-org9b89f4a" class="outline-2">
-<h2 id="org9b89f4a">Python</h2>
-<div class="outline-text-2" id="text-org9b89f4a">
+<div id="outline-container-org20bb567" class="outline-2">
+<h2 id="org20bb567">Python</h2>
+<div class="outline-text-2" id="text-org20bb567">
 </div>
-<div id="outline-container-org8b9145c" class="outline-3">
-<h3 id="org8b9145c">Прямой алгоритм</h3>
-<div class="outline-text-3" id="text-org8b9145c">
+<div id="outline-container-org1149f0b" class="outline-3">
+<h3 id="org1149f0b">Прямой алгоритм</h3>
+<div class="outline-text-3" id="text-org1149f0b">
 <p>
 Всё тоже самое но уже на Python3.
 </p>
@@ -400,7 +401,7 @@
 <p>
 Результаты:
 </p>
-<pre class="example" id="org82a7bb6">
+<pre class="example" id="orgd963ce9">
 found: 55252; time: 1.3160340785980225
 found: 55252; time: 1.1410844326019287
 found: 55252; time: 1.1812174320220947
@@ -412,9 +413,9 @@ found: 55252; time: 1.1812174320220947
 </div>
 </div>
 
-<div id="outline-container-orgc88379c" class="outline-3">
-<h3 id="orgc88379c">Генератор</h3>
-<div class="outline-text-3" id="text-orgc88379c">
+<div id="outline-container-org4d09b8f" class="outline-3">
+<h3 id="org4d09b8f">Генератор</h3>
+<div class="outline-text-3" id="text-org4d09b8f">
 <p>
 Вторая реализация не несет ничего нового, просто использует генераторы списков вместо итераций (это же Python, ну):
 </p>
@@ -439,7 +440,7 @@ found: 55252; time: 1.1812174320220947
 <p>
 Результаты немного меньше варианта с итерациями, неожиданно. Я думал будет плюс-минус так же.
 </p>
-<pre class="example" id="orgf87f64a">
+<pre class="example" id="org97bf357">
 found: 55252; time: 1.0612552165985107
 found: 55252; time: 0.9660782814025879
 found: 55252; time: 0.9880800247192383
@@ -448,9 +449,9 @@ found: 55252; time: 0.9880800247192383
 </div>
 </div>
 
-<div id="outline-container-org1fc4ca8" class="outline-2">
-<h2 id="org1fc4ca8">Go</h2>
-<div class="outline-text-2" id="text-org1fc4ca8">
+<div id="outline-container-org345db99" class="outline-2">
+<h2 id="org345db99">Go</h2>
+<div class="outline-text-2" id="text-org345db99">
 <p>
 Перепишу алгоритм уже на Go.
 Так как используется метод Floor библиотеки math, который раборает с float64 значением, 
@@ -491,7 +492,7 @@ func main() {
 Даже без использования каких-то оптимизаций и горутин результат весьма неплох.
 </p>
 
-<pre class="example" id="orge35a7aa">
+<pre class="example" id="org40b90b9">
 found: 55252; time: 30.6257ms
 found: 55252; time: 26.9537ms
 found: 55252; time: 34.6804ms
@@ -504,9 +505,9 @@ found: 55252; time: 34.6804ms
 </div>
 </div>
 
-<div id="outline-container-org3998949" class="outline-2">
-<h2 id="org3998949">Elisp</h2>
-<div class="outline-text-2" id="text-org3998949">
+<div id="outline-container-org113a124" class="outline-2">
+<h2 id="org113a124">Elisp</h2>
+<div class="outline-text-2" id="text-org113a124">
 <p>
 Ну и как же без emacs lisp?
 </p>
@@ -546,7 +547,7 @@ found: 55252; time: 34.6804ms
 <p>
 Результаты из буфера <code>/*Messages/*</code>:
 </p>
-<pre class="example" id="orga74227f">
+<pre class="example" id="org0a2f817">
 found 55252; time 2.181s
 found 55252; time 2.403s
 found 55252; time 2.052s
@@ -554,9 +555,9 @@ found 55252; time 2.052s
 </div>
 </div>
 
-<div id="outline-container-orgf3cea53" class="outline-2">
-<h2 id="orgf3cea53">Итоги и выводы</h2>
-<div class="outline-text-2" id="text-orgf3cea53">
+<div id="outline-container-org5458482" class="outline-2">
+<h2 id="org5458482">Итоги и выводы</h2>
+<div class="outline-text-2" id="text-org5458482">
 <p>
 Для каждого замера я взял самый быстрый показатель:
 </p>
