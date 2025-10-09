@@ -21,9 +21,9 @@
 			  (insert-file-contents "templates/preamble.html")
 			  (buffer-string)))
 
-(setq org-html-head (with-temp-buffer
-			  (insert-file-contents "templates/head.html")
-			  (buffer-string)))
+;;(setq org-html-head (with-temp-buffer
+;;			  (insert-file-contents "templates/head.html")
+;;			  (buffer-string)))
 
 (defun blog/org-publish-org-sitemap-format-entry (entry style project)
   (format "%s - [[file:%s][%s]]"
