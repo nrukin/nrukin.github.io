@@ -6,10 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Служба Windows на FastAPI</title>
-<meta name="generator" content="Org mode" />
 <meta name="keywords" content="FastAPI" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -30,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -39,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -189,73 +190,8 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();
-   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-   ym(94443125, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true
-   });
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/94443125" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
-<link rel='stylesheet' type='text/css' href='css/site.css' />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -276,7 +212,7 @@ for the JavaScript code in this tag.
   </ul>
 </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Служба Windows на FastAPI</h1>
 <p>
 Опишу процесс создания Windows-приложения на основании FastAPI, которое будет:
@@ -297,9 +233,9 @@ for the JavaScript code in this tag.
 Весь код проекта доступен в <a href="https://github.com/nrukin/fastapi-win-service-example">на GitHub</a>.
 </p>
 
-<div id="outline-container-orgd81c57e" class="outline-2">
-<h2 id="orgd81c57e">Подготовка</h2>
-<div class="outline-text-2" id="text-orgd81c57e">
+<div id="outline-container-org107f7f5" class="outline-2">
+<h2 id="org107f7f5">Подготовка</h2>
+<div class="outline-text-2" id="text-org107f7f5">
 <p>
 Создаем папку проекта, виртуальное окружение, устанавливаем зависимости.
 </p>
@@ -315,9 +251,9 @@ pip install pyinstaller fastapi pywin32 <span style="font-style: italic;">"uvico
 </div>
 </div>
 </div>
-<div id="outline-container-org7e7bd15" class="outline-2">
-<h2 id="org7e7bd15">Простой app</h2>
-<div class="outline-text-2" id="text-org7e7bd15">
+<div id="outline-container-orgfc20328" class="outline-2">
+<h2 id="orgfc20328">Простой app</h2>
+<div class="outline-text-2" id="text-orgfc20328">
 <p>
 Пишем сервис. Код примитивный: слушаем адрес <code>generate_uuid</code>,
 при входящем запросе генерируем uuid - столько сколько запросили.
@@ -354,13 +290,13 @@ pip install pyinstaller fastapi pywin32 <span style="font-style: italic;">"uvico
 </div>
 </div>
 
-<div id="outline-container-orgee22211" class="outline-2">
-<h2 id="orgee22211">Усложняем</h2>
-<div class="outline-text-2" id="text-orgee22211">
+<div id="outline-container-org30f4edf" class="outline-2">
+<h2 id="org30f4edf">Усложняем</h2>
+<div class="outline-text-2" id="text-org30f4edf">
 </div>
-<div id="outline-container-orgb0ad8a2" class="outline-3">
-<h3 id="orgb0ad8a2">Файл main.py</h3>
-<div class="outline-text-3" id="text-orgb0ad8a2">
+<div id="outline-container-orgaf48a16" class="outline-3">
+<h3 id="orgaf48a16">Файл main.py</h3>
+<div class="outline-text-3" id="text-orgaf48a16">
 <p>
 Слегка усложним код, заодно победим пару проблем:
 </p>
@@ -398,21 +334,21 @@ pip install pyinstaller fastapi pywin32 <span style="font-style: italic;">"uvico
 
 <span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">Server</span>():
     <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">__init__</span>(<span style="font-weight: bold;">self</span>, as_service=<span style="font-weight: bold; text-decoration: underline;">False</span>):
-        <span style="font-weight: bold;">self</span>._srv = <span style="font-weight: bold; text-decoration: underline;">None</span>
-        <span style="font-weight: bold;">self</span>.as_service = as_service
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">_srv</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">as_service</span> = as_service
 
     <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">start</span>(<span style="font-weight: bold;">self</span>):
         <span style="font-weight: bold; font-style: italic;">config</span> = uvicorn.Config(app)
-        <span style="font-weight: bold;">self</span>._srv = uvicorn.Server(config=config)
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">_srv</span> = uvicorn.Server(config=config)
 
         <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">self</span>.as_service:
-            <span style="font-weight: bold;">self</span>._srv.install_signal_handlers = <span style="font-weight: bold;">lambda</span>: <span style="font-weight: bold; text-decoration: underline;">None</span>
+            <span style="font-weight: bold;">self</span>._srv.<span style="font-weight: bold; font-style: italic;">install_signal_handlers</span> = <span style="font-weight: bold;">lambda</span>: <span style="font-weight: bold; text-decoration: underline;">None</span>
 
         <span style="font-weight: bold;">self</span>._srv.run()
 
     <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">stop</span>(<span style="font-weight: bold;">self</span>):
         <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">self</span>._srv <span style="font-weight: bold;">is</span> <span style="font-weight: bold;">not</span> <span style="font-weight: bold; text-decoration: underline;">None</span>:
-            <span style="font-weight: bold;">self</span>._srv.should_exit = <span style="font-weight: bold; text-decoration: underline;">True</span>
+            <span style="font-weight: bold;">self</span>._srv.<span style="font-weight: bold; font-style: italic;">should_exit</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
 
 
 <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">run</span>():
@@ -436,9 +372,9 @@ pip install pyinstaller fastapi pywin32 <span style="font-style: italic;">"uvico
 </div>
 </div>
 
-<div id="outline-container-org24514ef" class="outline-3">
-<h3 id="org24514ef">Файл service.py</h3>
-<div class="outline-text-3" id="text-org24514ef">
+<div id="outline-container-org0f3a91c" class="outline-3">
+<h3 id="org0f3a91c">Файл service.py</h3>
+<div class="outline-text-3" id="text-org0f3a91c">
 <p>
 Этот файл нужен нам для того чтобы наш app работал в режиме Windows-службы, здесь мы:
 </p>
@@ -467,9 +403,9 @@ pip install pyinstaller fastapi pywin32 <span style="font-style: italic;">"uvico
 
     <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">__init__</span>(<span style="font-weight: bold;">self</span>, args):
         win32serviceutil.ServiceFramework.__init__(<span style="font-weight: bold;">self</span>, args)
-        <span style="font-weight: bold;">self</span>.hWaitStop = win32event.CreateEvent(<span style="font-weight: bold; text-decoration: underline;">None</span>, 0, 0, <span style="font-weight: bold; text-decoration: underline;">None</span>)
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">hWaitStop</span> = win32event.CreateEvent(<span style="font-weight: bold; text-decoration: underline;">None</span>, 0, 0, <span style="font-weight: bold; text-decoration: underline;">None</span>)
         socket.setdefaulttimeout(60)
-        <span style="font-weight: bold;">self</span>.svc = <span style="font-weight: bold; text-decoration: underline;">None</span>
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">svc</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>
 
     <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">SvcStop</span>(<span style="font-weight: bold;">self</span>):
         <span style="font-weight: bold;">self</span>.ReportServiceStatus(win32service.SERVICE_STOP_PENDING)
@@ -482,7 +418,7 @@ pip install pyinstaller fastapi pywin32 <span style="font-style: italic;">"uvico
         servicemanager.LogMsg(servicemanager.EVENTLOG_INFORMATION_TYPE,
                               servicemanager.PYS_SERVICE_STARTED,
                               (<span style="font-weight: bold;">self</span>._svc_name_, <span style="font-style: italic;">''</span>))
-        <span style="font-weight: bold;">self</span>.svc = Server(<span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">svc</span> = Server(<span style="font-weight: bold; text-decoration: underline;">True</span>)
         <span style="font-weight: bold;">self</span>.svc.start()
 
 
@@ -503,9 +439,9 @@ pip install pyinstaller fastapi pywin32 <span style="font-style: italic;">"uvico
 </div>
 </div>
 
-<div id="outline-container-orgb3501a8" class="outline-2">
-<h2 id="orgb3501a8">Сборка exe</h2>
-<div class="outline-text-2" id="text-orgb3501a8">
+<div id="outline-container-orgc0c595d" class="outline-2">
+<h2 id="orgc0c595d">Сборка exe</h2>
+<div class="outline-text-2" id="text-orgc0c595d">
 <p>
 Для сборки в exe вызовем установленный pyinstaller:
 </p>
@@ -520,9 +456,9 @@ pip install pyinstaller fastapi pywin32 <span style="font-style: italic;">"uvico
 </div>
 </div>
 
-<div id="outline-container-org1261f13" class="outline-2">
-<h2 id="org1261f13">Установка сервиса</h2>
-<div class="outline-text-2" id="text-org1261f13">
+<div id="outline-container-orgf5bc1bd" class="outline-2">
+<h2 id="orgf5bc1bd">Установка сервиса</h2>
+<div class="outline-text-2" id="text-orgf5bc1bd">
 <p>
 Устанавливаем службу
 </p>

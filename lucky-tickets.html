@@ -6,10 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Задача счастливых билетиков и сравнение производительности языков</title>
-<meta name="generator" content="Org mode" />
 <meta name="keywords" content="benchmark" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -30,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -39,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -189,73 +190,8 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();
-   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-   ym(94443125, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true
-   });
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/94443125" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
-<link rel='stylesheet' type='text/css' href='css/site.css' />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -276,7 +212,7 @@ for the JavaScript code in this tag.
   </ul>
 </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Задача счастливых билетиков и сравнение производительности языков</h1>
 <p class="verse">
 <b>Обновление от 23.10.2023</b>: Продолжение - <a href="./lucky-tickets-2.html">Решение задачи счастливых билетов в общем виде</a>.<br />
@@ -297,18 +233,18 @@ for the JavaScript code in this tag.
 Для Счетчик = 0 По 999999 Цикл
     СчетчикСтрокой = Формат(Счетчик, "ЧЦ=6; ЧН=; ЧВН=; ЧГ=");
     СуммаЛев = 
-	Число(Сред(СчетчикСтрокой,1,1)) + 
-	Число(Сред(СчетчикСтрокой,2,1)) + 
-	Число(Сред(СчетчикСтрокой,3,1));
+        Число(Сред(СчетчикСтрокой,1,1)) + 
+        Число(Сред(СчетчикСтрокой,2,1)) + 
+        Число(Сред(СчетчикСтрокой,3,1));
 
     СуммаПрав = 
-	Число(Сред(СчетчикСтрокой,4,1)) + 
-	Число(Сред(СчетчикСтрокой,5,1)) + 
-	Число(Сред(СчетчикСтрокой,6,1));
+        Число(Сред(СчетчикСтрокой,4,1)) + 
+        Число(Сред(СчетчикСтрокой,5,1)) + 
+        Число(Сред(СчетчикСтрокой,6,1));
 
     Если СуммаЛев = СуммаПрав Тогда
-	Сообщить(СчетчикСтрокой);
-	Результат = Результат + 1;
+        Сообщить(СчетчикСтрокой);
+        Результат = Результат + 1;
     КонецЕсли;
 КонецЦикла;
 
@@ -323,9 +259,9 @@ for the JavaScript code in this tag.
 для сравнения производительности, например, разных языков программирования.
 </p>
 
-<div id="outline-container-org998aecc" class="outline-2">
-<h2 id="org998aecc">О тестовой машине</h2>
-<div class="outline-text-2" id="text-org998aecc">
+<div id="outline-container-org0a5b033" class="outline-2">
+<h2 id="org0a5b033">О тестовой машине</h2>
+<div class="outline-text-2" id="text-org0a5b033">
 <p>
 Весь код запускается на одной и той же машине, в связи с тем что здесь у нас участвует 1С, я буду использовать
 компьютер под управлением Windows на процессоре <b>AMD Ryzen 5 3500U</b>. Понятно что один и тот же тест будет 
@@ -338,13 +274,13 @@ for the JavaScript code in this tag.
 </p>
 </div>
 </div>
-<div id="outline-container-org9de7e12" class="outline-2">
-<h2 id="org9de7e12">1C</h2>
-<div class="outline-text-2" id="text-org9de7e12">
+<div id="outline-container-orgc979b26" class="outline-2">
+<h2 id="orgc979b26">1C</h2>
+<div class="outline-text-2" id="text-orgc979b26">
 </div>
-<div id="outline-container-orgc860d2d" class="outline-3">
-<h3 id="orgc860d2d">Числа</h3>
-<div class="outline-text-3" id="text-orgc860d2d">
+<div id="outline-container-orgc7e18cb" class="outline-3">
+<h3 id="orgc7e18cb">Числа</h3>
+<div class="outline-text-3" id="text-orgc7e18cb">
 <p>
 В первую очередь я переписал алгоритм на 1С. На этот раз я отказался от строковых конвертаций и от
 вывода результатов. Отказ от вывода значительно ускорил выполнение.
@@ -355,15 +291,15 @@ for the JavaScript code in this tag.
     Н = ТекущаяУниверсальнаяДатаВМиллисекундах();
     Р = 0;
     Для i = 0 По 999999 Цикл
-	Если 
-		Цел(i/100000)%10 + 
-		Цел(i/10000)%10 + 
-		Цел(i/1000)%10 = 
-		Цел(i/100)%10 + 
-		Цел(i/10)%10 + 
-		Цел(i/1)%10 Тогда 
-	    Р=Р+1;
-	КонецЕсли;
+        Если 
+                Цел(i/100000)%10 + 
+                Цел(i/10000)%10 + 
+                Цел(i/1000)%10 = 
+                Цел(i/100)%10 + 
+                Цел(i/10)%10 + 
+                Цел(i/1)%10 Тогда 
+            Р=Р+1;
+        КонецЕсли;
     КонецЦикла;
     К = ТекущаяУниверсальнаяДатаВМиллисекундах();
     Сообщить(СтрШаблон("Найдено: %1; Время выполнения: %2 с", Р, (К-Н)/1000));
@@ -373,7 +309,7 @@ for the JavaScript code in this tag.
 <p>
 Результаты трех запусков
 </p>
-<pre class="example">
+<pre class="example" id="orgda0b101">
 Найдено: 55 252; Время выполнения: 6,493 с
 Найдено: 55 252; Время выполнения: 7,346 с
 Найдено: 55 252; Время выполнения: 7,316 с
@@ -381,9 +317,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org560d97d" class="outline-3">
-<h3 id="org560d97d">Строки</h3>
-<div class="outline-text-3" id="text-org560d97d">
+<div id="outline-container-orgc66d40a" class="outline-3">
+<h3 id="orgc66d40a">Строки</h3>
+<div class="outline-text-3" id="text-orgc66d40a">
 <p>
 Воспроизведу первый алгоритм - конвертируем число в строку, потом разбиваем строку на подстроки и обратно корвертируем в числа (ой):
 </p>
@@ -394,16 +330,16 @@ for the JavaScript code in this tag.
     Н = ТекущаяУниверсальнаяДатаВМиллисекундах();
     Р = 0;
     Для i = 0 По 999999 Цикл
-	ст = Формат(i, "ЧЦ=6; ЧН=; ЧВН=; ЧГ=");
-	Если 
-		Число(Сред(ст,1,1)) + 
-		Число(Сред(ст,2,1)) + 
-		Число(Сред(ст,3,1)) = 
-		Число(Сред(ст,4,1)) + 
-		Число(Сред(ст,5,1)) + 
-		Число(Сред(ст,6,1)) Тогда 
-	    Р=Р+1; 
-	КонецЕсли;    
+        ст = Формат(i, "ЧЦ=6; ЧН=; ЧВН=; ЧГ=");
+        Если 
+                Число(Сред(ст,1,1)) + 
+                Число(Сред(ст,2,1)) + 
+                Число(Сред(ст,3,1)) = 
+                Число(Сред(ст,4,1)) + 
+                Число(Сред(ст,5,1)) + 
+                Число(Сред(ст,6,1)) Тогда 
+            Р=Р+1; 
+        КонецЕсли;    
     КонецЦикла;
     К = ТекущаяУниверсальнаяДатаВМиллисекундах();
     Сообщить(СтрШаблон("Найдено: %1; Время выполнения: %2 с", Р, (К-Н)/1000));
@@ -414,7 +350,7 @@ for the JavaScript code in this tag.
 И снова три запуска:
 </p>
 
-<pre class="example">
+<pre class="example" id="org485af97">
 Найдено: 55 252; Время выполнения: 15,712 с
 Найдено: 55 252; Время выполнения: 15,557 с
 Найдено: 55 252; Время выполнения: 16,121 с
@@ -427,13 +363,13 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org000885f" class="outline-2">
-<h2 id="org000885f">Python</h2>
-<div class="outline-text-2" id="text-org000885f">
+<div id="outline-container-org9b89f4a" class="outline-2">
+<h2 id="org9b89f4a">Python</h2>
+<div class="outline-text-2" id="text-org9b89f4a">
 </div>
-<div id="outline-container-org0dadce8" class="outline-3">
-<h3 id="org0dadce8">Прямой алгоритм</h3>
-<div class="outline-text-3" id="text-org0dadce8">
+<div id="outline-container-org8b9145c" class="outline-3">
+<h3 id="org8b9145c">Прямой алгоритм</h3>
+<div class="outline-text-3" id="text-org8b9145c">
 <p>
 Всё тоже самое но уже на Python3.
 </p>
@@ -464,7 +400,7 @@ for the JavaScript code in this tag.
 <p>
 Результаты:
 </p>
-<pre class="example">
+<pre class="example" id="org82a7bb6">
 found: 55252; time: 1.3160340785980225
 found: 55252; time: 1.1410844326019287
 found: 55252; time: 1.1812174320220947
@@ -476,9 +412,9 @@ found: 55252; time: 1.1812174320220947
 </div>
 </div>
 
-<div id="outline-container-orgce07e81" class="outline-3">
-<h3 id="orgce07e81">Генератор</h3>
-<div class="outline-text-3" id="text-orgce07e81">
+<div id="outline-container-orgc88379c" class="outline-3">
+<h3 id="orgc88379c">Генератор</h3>
+<div class="outline-text-3" id="text-orgc88379c">
 <p>
 Вторая реализация не несет ничего нового, просто использует генераторы списков вместо итераций (это же Python, ну):
 </p>
@@ -503,7 +439,7 @@ found: 55252; time: 1.1812174320220947
 <p>
 Результаты немного меньше варианта с итерациями, неожиданно. Я думал будет плюс-минус так же.
 </p>
-<pre class="example">
+<pre class="example" id="orgf87f64a">
 found: 55252; time: 1.0612552165985107
 found: 55252; time: 0.9660782814025879
 found: 55252; time: 0.9880800247192383
@@ -512,9 +448,9 @@ found: 55252; time: 0.9880800247192383
 </div>
 </div>
 
-<div id="outline-container-org012b8af" class="outline-2">
-<h2 id="org012b8af">Go</h2>
-<div class="outline-text-2" id="text-org012b8af">
+<div id="outline-container-org1fc4ca8" class="outline-2">
+<h2 id="org1fc4ca8">Go</h2>
+<div class="outline-text-2" id="text-org1fc4ca8">
 <p>
 Перепишу алгоритм уже на Go.
 Так как используется метод Floor библиотеки math, который раборает с float64 значением, 
@@ -525,28 +461,28 @@ found: 55252; time: 0.9880800247192383
 <pre class="src src-go">package main
 
 import (
-	"fmt"
-	"math"
-	"time"
+        "fmt"
+        "math"
+        "time"
 )
 
 func main() {
-	s := time.Now()
-	r := 0
-	for i := 0.0; i &lt;= 999999.0; i++ {
+        s := time.Now()
+        r := 0
+        for i := 0.0; i &lt;= 999999.0; i++ {
 
-		if int(math.Floor(i/100000.))%10+
-			int(math.Floor(i/10000.))%10+
-			int(math.Floor(i/1000.))%10 ==
-			int(math.Floor(i/100.))%10+
-				int(math.Floor(i/10.))%10+
-				int(math.Floor(i/1.))%10 {
-			r++
-		}
+                if int(math.Floor(i/100000.))%10+
+                        int(math.Floor(i/10000.))%10+
+                        int(math.Floor(i/1000.))%10 ==
+                        int(math.Floor(i/100.))%10+
+                                int(math.Floor(i/10.))%10+
+                                int(math.Floor(i/1.))%10 {
+                        r++
+                }
 
-	}
-	e := time.Now()
-	fmt.Printf("found: %d; time: %v", r, e.Sub(s))
+        }
+        e := time.Now()
+        fmt.Printf("found: %d; time: %v", r, e.Sub(s))
 }
 </pre>
 </div>
@@ -555,7 +491,7 @@ func main() {
 Даже без использования каких-то оптимизаций и горутин результат весьма неплох.
 </p>
 
-<pre class="example">
+<pre class="example" id="orge35a7aa">
 found: 55252; time: 30.6257ms
 found: 55252; time: 26.9537ms
 found: 55252; time: 34.6804ms
@@ -568,9 +504,9 @@ found: 55252; time: 34.6804ms
 </div>
 </div>
 
-<div id="outline-container-orge935ead" class="outline-2">
-<h2 id="orge935ead">Elisp</h2>
-<div class="outline-text-2" id="text-orge935ead">
+<div id="outline-container-org3998949" class="outline-2">
+<h2 id="org3998949">Elisp</h2>
+<div class="outline-text-2" id="text-org3998949">
 <p>
 Ну и как же без emacs lisp?
 </p>
@@ -582,8 +518,8 @@ found: 55252; time: 34.6804ms
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">lucky-numbers</span> ()
   (<span style="font-weight: bold;">interactive</span>)
-  <span style="font-style: italic;">"&#1057;&#1095;&#1080;&#1090;&#1072;&#1077;&#1084; &#1089;&#1095;&#1072;&#1089;&#1090;&#1083;&#1080;&#1074;&#1099;&#1077; &#1085;&#1086;&#1084;&#1077;&#1088;&#1072; &#1073;&#1080;&#1083;&#1077;&#1090;&#1086;&#1074; &#1086;&#1090; 000000 &#1076;&#1086; 999999, </span>
-<span style="font-style: italic;">&#1079;&#1072;&#1084;&#1077;&#1088;&#1103;&#1077;&#1084; &#1074;&#1088;&#1077;&#1084;&#1103; &#1074;&#1099;&#1087;&#1086;&#1083;&#1085;&#1077;&#1085;&#1080;&#1103;"</span>
+  <span style="font-style: italic;">"&#1057;&#1095;&#1080;&#1090;&#1072;&#1077;&#1084; &#1089;&#1095;&#1072;&#1089;&#1090;&#1083;&#1080;&#1074;&#1099;&#1077; &#1085;&#1086;&#1084;&#1077;&#1088;&#1072; &#1073;&#1080;&#1083;&#1077;&#1090;&#1086;&#1074; &#1086;&#1090; 000000 &#1076;&#1086; 999999, 
+&#1079;&#1072;&#1084;&#1077;&#1088;&#1103;&#1077;&#1084; &#1074;&#1088;&#1077;&#1084;&#1103; &#1074;&#1099;&#1087;&#1086;&#1083;&#1085;&#1077;&#1085;&#1080;&#1103;"</span>
   (<span style="font-weight: bold;">let</span> ((num 0)
         (res 0)
         (start-time (current-time)))
@@ -610,7 +546,7 @@ found: 55252; time: 34.6804ms
 <p>
 Результаты из буфера <code>/*Messages/*</code>:
 </p>
-<pre class="example">
+<pre class="example" id="orga74227f">
 found 55252; time 2.181s
 found 55252; time 2.403s
 found 55252; time 2.052s
@@ -618,9 +554,9 @@ found 55252; time 2.052s
 </div>
 </div>
 
-<div id="outline-container-org4f15f68" class="outline-2">
-<h2 id="org4f15f68">Итоги и выводы</h2>
-<div class="outline-text-2" id="text-org4f15f68">
+<div id="outline-container-orgf3cea53" class="outline-2">
+<h2 id="orgf3cea53">Итоги и выводы</h2>
+<div class="outline-text-2" id="text-orgf3cea53">
 <p>
 Для каждого замера я взял самый быстрый показатель:
 </p>

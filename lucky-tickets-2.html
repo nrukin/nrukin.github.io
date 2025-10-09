@@ -6,10 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Подсчет счастливых билетов на Python</title>
-<meta name="generator" content="Org mode" />
 <meta name="keywords" content="python lucky-tickets" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -30,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -39,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -189,73 +190,8 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();
-   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-   ym(94443125, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true
-   });
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/94443125" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
-<link rel='stylesheet' type='text/css' href='css/site.css' />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -276,7 +212,7 @@ for the JavaScript code in this tag.
   </ul>
 </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Подсчет счастливых билетов на Python</h1>
 <p>
 Яндекс.Метрика показывает несколько визитов <a href="./lucky-tickets.html">предыдущего поста</a> по поисковым запросам "Счастливые билеты Python".
@@ -304,9 +240,9 @@ for the JavaScript code in this tag.
 буду алгоритмически.
 </p>
 
-<div id="outline-container-orgba9fe58" class="outline-2">
-<h2 id="orgba9fe58">Вариант 1. Примитивный</h2>
-<div class="outline-text-2" id="text-orgba9fe58">
+<div id="outline-container-org242e379" class="outline-2">
+<h2 id="org242e379">Вариант 1. Примитивный</h2>
+<div class="outline-text-2" id="text-org242e379">
 <p>
 Самый простой алгоритм:
 </p>
@@ -316,37 +252,37 @@ for the JavaScript code in this tag.
 
 <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">countTickets</span>(n):
     <span style="font-weight: bold; font-style: italic;">res</span> = 0
-    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1042; &#1094;&#1080;&#1082;&#1083;&#1077; &#1087;&#1077;&#1088;&#1077;&#1073;&#1080;&#1088;&#1072;&#1077;&#1084; &#1074;&#1089;&#1077; &#1074;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090;&#1099; &#1074; &#1074;&#1099;&#1073;&#1086;&#1088;&#1082;&#1077;</span>
-    <span style="font-weight: bold;">for</span> i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(<span style="font-weight: bold;">pow</span>(10, 2 * n)):
-        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1042; &#1082;&#1072;&#1078;&#1076;&#1086;&#1081; &#1080;&#1090;&#1077;&#1088;&#1072;&#1094;&#1080;&#1080; &#1094;&#1080;&#1082;&#1083;&#1072; &#1087;&#1086;&#1087;&#1088;&#1086;&#1073;&#1091;&#1077;&#1084;</span>
-        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1087;&#1086;&#1085;&#1103;&#1090;&#1100; - &#1103;&#1074;&#1083;&#1103;&#1077;&#1090;&#1089;&#1103; &#1083;&#1080; &#1085;&#1072;&#1096; &#1073;&#1080;&#1083;&#1077;&#1090;&#1080;&#1082; &#1089;&#1095;&#1072;&#1089;&#1090;&#1083;&#1080;&#1074;&#1099;&#1084; &#1080;&#1083;&#1080; &#1085;&#1077;&#1090;</span>
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1042; &#1094;&#1080;&#1082;&#1083;&#1077; &#1087;&#1077;&#1088;&#1077;&#1073;&#1080;&#1088;&#1072;&#1077;&#1084; &#1074;&#1089;&#1077; &#1074;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090;&#1099; &#1074; &#1074;&#1099;&#1073;&#1086;&#1088;&#1082;&#1077;
+</span>    <span style="font-weight: bold;">for</span> i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(<span style="font-weight: bold;">pow</span>(10, 2 * n)):
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1042; &#1082;&#1072;&#1078;&#1076;&#1086;&#1081; &#1080;&#1090;&#1077;&#1088;&#1072;&#1094;&#1080;&#1080; &#1094;&#1080;&#1082;&#1083;&#1072; &#1087;&#1086;&#1087;&#1088;&#1086;&#1073;&#1091;&#1077;&#1084;
+</span>        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1087;&#1086;&#1085;&#1103;&#1090;&#1100; - &#1103;&#1074;&#1083;&#1103;&#1077;&#1090;&#1089;&#1103; &#1083;&#1080; &#1085;&#1072;&#1096; &#1073;&#1080;&#1083;&#1077;&#1090;&#1080;&#1082; &#1089;&#1095;&#1072;&#1089;&#1090;&#1083;&#1080;&#1074;&#1099;&#1084; &#1080;&#1083;&#1080; &#1085;&#1077;&#1090;
+</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1055;&#1088;&#1077;&#1086;&#1073;&#1088;&#1072;&#1079;&#1091;&#1077;&#1084; &#1095;&#1080;&#1089;&#1083;&#1086; &#1074; &#1082;&#1086;&#1088;&#1090;&#1077;&#1078; &#1095;&#1080;&#1089;&#1077;&#1083;
+</span>        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1076;&#1083;&#1103; &#1101;&#1090;&#1086;&#1075;&#1086; &#1082;&#1086;&#1085;&#1074;&#1077;&#1088;&#1090;&#1080;&#1088;&#1091;&#1077;&#1084; &#1095;&#1080;&#1089;&#1083;&#1086; &#1074; &#1089;&#1090;&#1088;&#1086;&#1082;&#1091; &#1089; &#1083;&#1080;&#1076;&#1080;&#1088;&#1091;&#1102;&#1097;&#1080;&#1084;&#1080;
+</span>        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1085;&#1086;&#1083;&#1103;&#1084;&#1080;, &#1072; &#1079;&#1072;&#1090;&#1077;&#1084; &#1088;&#1072;&#1079;&#1083;&#1086;&#1078;&#1080;&#1084; &#1089;&#1090;&#1088;&#1086;&#1082;&#1091; &#1085;&#1072; &#1086;&#1090;&#1076;&#1077;&#1083;&#1100;&#1085;&#1099;&#1077; &#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1099;
+</span>        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1080; &#1082;&#1086;&#1085;&#1074;&#1077;&#1088;&#1090;&#1080;&#1088;&#1091;&#1077;&#1084; &#1086;&#1073;&#1088;&#1072;&#1090;&#1085;&#1086;
+</span>        <span style="font-weight: bold; font-style: italic;">d</span> = [<span style="font-weight: bold;">int</span>(q) <span style="font-weight: bold;">for</span> q <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">str</span>(i).zfill(n*2)]
 
-        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1055;&#1088;&#1077;&#1086;&#1073;&#1088;&#1072;&#1079;&#1091;&#1077;&#1084; &#1095;&#1080;&#1089;&#1083;&#1086; &#1074; &#1082;&#1086;&#1088;&#1090;&#1077;&#1078; &#1095;&#1080;&#1089;&#1077;&#1083;</span>
-        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1076;&#1083;&#1103; &#1101;&#1090;&#1086;&#1075;&#1086; &#1082;&#1086;&#1085;&#1074;&#1077;&#1088;&#1090;&#1080;&#1088;&#1091;&#1077;&#1084; &#1095;&#1080;&#1089;&#1083;&#1086; &#1074; &#1089;&#1090;&#1088;&#1086;&#1082;&#1091; &#1089; &#1083;&#1080;&#1076;&#1080;&#1088;&#1091;&#1102;&#1097;&#1080;&#1084;&#1080;</span>
-        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1085;&#1086;&#1083;&#1103;&#1084;&#1080;, &#1072; &#1079;&#1072;&#1090;&#1077;&#1084; &#1088;&#1072;&#1079;&#1083;&#1086;&#1078;&#1080;&#1084; &#1089;&#1090;&#1088;&#1086;&#1082;&#1091; &#1085;&#1072; &#1086;&#1090;&#1076;&#1077;&#1083;&#1100;&#1085;&#1099;&#1077; &#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1099;</span>
-        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1080; &#1082;&#1086;&#1085;&#1074;&#1077;&#1088;&#1090;&#1080;&#1088;&#1091;&#1077;&#1084; &#1086;&#1073;&#1088;&#1072;&#1090;&#1085;&#1086;</span>
-        <span style="font-weight: bold; font-style: italic;">d</span> = [<span style="font-weight: bold;">int</span>(q) <span style="font-weight: bold;">for</span> q <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">str</span>(i).zfill(n*2)]
-
-        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1087;&#1088;&#1080; &#1087;&#1086;&#1084;&#1086;&#1097;&#1080; &#1089;&#1088;&#1077;&#1079;&#1086;&#1074; &#1087;&#1086;&#1089;&#1095;&#1080;&#1090;&#1072;&#1077;&#1084; &#1089;&#1091;&#1084;&#1084;&#1099; &#1083;&#1077;&#1074;&#1086;&#1081;</span>
-        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1080; &#1087;&#1088;&#1072;&#1074;&#1086;&#1081; &#1087;&#1086;&#1083;&#1086;&#1074;&#1080;&#1085;&#1086;&#1082; &#1082;&#1086;&#1088;&#1090;&#1077;&#1078;&#1072;, &#1080; &#1080;&#1085;&#1082;&#1088;&#1077;&#1084;&#1077;&#1085;&#1088;&#1080;&#1090;&#1091;&#1077;&#1084; &#1089;&#1095;&#1077;&#1090;&#1095;&#1080;&#1082;</span>
-        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1087;&#1088;&#1080; &#1089;&#1086;&#1074;&#1087;&#1072;&#1076;&#1077;&#1085;&#1080;&#1080;</span>
-        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">sum</span>(d[:n]) == <span style="font-weight: bold;">sum</span>(d[n:]):
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1087;&#1088;&#1080; &#1087;&#1086;&#1084;&#1086;&#1097;&#1080; &#1089;&#1088;&#1077;&#1079;&#1086;&#1074; &#1087;&#1086;&#1089;&#1095;&#1080;&#1090;&#1072;&#1077;&#1084; &#1089;&#1091;&#1084;&#1084;&#1099; &#1083;&#1077;&#1074;&#1086;&#1081;
+</span>        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1080; &#1087;&#1088;&#1072;&#1074;&#1086;&#1081; &#1087;&#1086;&#1083;&#1086;&#1074;&#1080;&#1085;&#1086;&#1082; &#1082;&#1086;&#1088;&#1090;&#1077;&#1078;&#1072;, &#1080; &#1080;&#1085;&#1082;&#1088;&#1077;&#1084;&#1077;&#1085;&#1088;&#1080;&#1090;&#1091;&#1077;&#1084; &#1089;&#1095;&#1077;&#1090;&#1095;&#1080;&#1082;
+</span>        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1087;&#1088;&#1080; &#1089;&#1086;&#1074;&#1087;&#1072;&#1076;&#1077;&#1085;&#1080;&#1080;
+</span>        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">sum</span>(d[:n]) == <span style="font-weight: bold;">sum</span>(d[n:]):
             <span style="font-weight: bold; font-style: italic;">res</span>+=1
 
     <span style="font-weight: bold;">return</span> res
 
 <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">__name__</span> == <span style="font-style: italic;">"__main__"</span>:
-    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1087;&#1086;-&#1091;&#1084;&#1086;&#1083;&#1095;&#1072;&#1085;&#1080;&#1102;</span>
-    <span style="font-weight: bold; font-style: italic;">n</span> = 3
-    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1087;&#1088;&#1086;&#1074;&#1077;&#1088;&#1103;&#1077;&#1084; - &#1077;&#1089;&#1083;&#1080; &#1073;&#1099;&#1083; &#1087;&#1077;&#1088;&#1077;&#1076;&#1072;&#1085; &#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;</span>
-    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1082;&#1086;&#1084;&#1072;&#1085;&#1076;&#1085;&#1086;&#1081; &#1089;&#1090;&#1088;&#1086;&#1082;&#1080; - &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1077;&#1084; &#1077;&#1075;&#1086;</span>
-    <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">len</span>(sys.argv) &gt; 1:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1087;&#1086;-&#1091;&#1084;&#1086;&#1083;&#1095;&#1072;&#1085;&#1080;&#1102;
+</span>    <span style="font-weight: bold; font-style: italic;">n</span> = 3
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1087;&#1088;&#1086;&#1074;&#1077;&#1088;&#1103;&#1077;&#1084; - &#1077;&#1089;&#1083;&#1080; &#1073;&#1099;&#1083; &#1087;&#1077;&#1088;&#1077;&#1076;&#1072;&#1085; &#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1082;&#1086;&#1084;&#1072;&#1085;&#1076;&#1085;&#1086;&#1081; &#1089;&#1090;&#1088;&#1086;&#1082;&#1080; - &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1077;&#1084; &#1077;&#1075;&#1086;
+</span>    <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">len</span>(sys.argv) &gt; 1:
         <span style="font-weight: bold; font-style: italic;">n</span> = <span style="font-weight: bold;">int</span>(sys.argv[1])
 
     <span style="font-weight: bold; font-style: italic;">res</span> = countTickets(n)
 
-    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1042;&#1099;&#1074;&#1077;&#1076;&#1077;&#1084; &#1088;&#1077;&#1079;&#1091;&#1083;&#1100;&#1090;&#1072;&#1090;. &#1048;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1077;&#1084; f-string, &#1086;&#1085;&#1080; &#1087;&#1088;&#1080;&#1082;&#1086;&#1083;&#1100;&#1085;&#1099;&#1077;</span>
-    <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">'&#1053;&#1072;&#1081;&#1076;&#1077;&#1085;&#1086; &#1073;&#1080;&#1083;&#1077;&#1090;&#1086;&#1074;: {res}'</span>)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#1042;&#1099;&#1074;&#1077;&#1076;&#1077;&#1084; &#1088;&#1077;&#1079;&#1091;&#1083;&#1100;&#1090;&#1072;&#1090;. &#1048;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1077;&#1084; f-string, &#1086;&#1085;&#1080; &#1087;&#1088;&#1080;&#1082;&#1086;&#1083;&#1100;&#1085;&#1099;&#1077;
+</span>    <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">'&#1053;&#1072;&#1081;&#1076;&#1077;&#1085;&#1086; &#1073;&#1080;&#1083;&#1077;&#1090;&#1086;&#1074;: </span>{res}<span style="font-style: italic;">'</span>)
 </pre>
 </div>
 
@@ -405,9 +341,9 @@ sys     0m0.035s
 </p>
 </div>
 
-<div id="outline-container-org23cc684" class="outline-3">
-<h3 id="org23cc684">Многопоточное выполнение</h3>
-<div class="outline-text-3" id="text-org23cc684">
+<div id="outline-container-org844cec9" class="outline-3">
+<h3 id="org844cec9">Многопоточное выполнение</h3>
+<div class="outline-text-3" id="text-org844cec9">
 <p>
 Очевидно что у нас есть некоторый набор расчетов, каждый из которых не зависит от расчетов других,
 значит мы смело можем разбить наш список на несколько раздельных списков и вычислить в несколько
@@ -438,9 +374,9 @@ sys     0m0.035s
 </div>
 </div>
 </div>
-<div id="outline-container-org92665a7" class="outline-2">
-<h2 id="org92665a7">Вариант 2</h2>
-<div class="outline-text-2" id="text-org92665a7">
+<div id="outline-container-orgeb7190d" class="outline-2">
+<h2 id="orgeb7190d">Вариант 2</h2>
+<div class="outline-text-2" id="text-orgeb7190d">
 <p>
 Очевидно что предыдущий вариант не самый оптимальный.
 </p>
@@ -524,7 +460,7 @@ sys     0m0.035s
     <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">len</span>(sys.argv) &gt; 1:
         <span style="font-weight: bold; font-style: italic;">n</span> = <span style="font-weight: bold;">int</span>(sys.argv[1])
     <span style="font-weight: bold; font-style: italic;">res</span> = countTickets(n)
-    <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">'&#1053;&#1072;&#1081;&#1076;&#1077;&#1085;&#1086; &#1073;&#1080;&#1083;&#1077;&#1090;&#1086;&#1074;: {res}'</span>)
+    <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">'&#1053;&#1072;&#1081;&#1076;&#1077;&#1085;&#1086; &#1073;&#1080;&#1083;&#1077;&#1090;&#1086;&#1074;: </span>{res}<span style="font-style: italic;">'</span>)
 
 </pre>
 </div>

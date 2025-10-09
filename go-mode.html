@@ -6,10 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Настройка emacs для программирования на Go</title>
-<meta name="generator" content="Org mode" />
 <meta name="keywords" content="emacs go" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -30,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -39,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -189,73 +190,8 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();
-   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-   ym(94443125, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true
-   });
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/94443125" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
-<link rel='stylesheet' type='text/css' href='css/site.css' />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -276,22 +212,22 @@ for the JavaScript code in this tag.
   </ul>
 </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Настройка emacs для программирования на Go</h1>
 <p>
 Короткая заметка о том как можно настроить emacs для написания (или чтения) кода на Go.
 </p>
 
-<div id="outline-container-orgcd3052f" class="outline-2">
-<h2 id="orgcd3052f">Установка go, gopls и goimport</h2>
-<div class="outline-text-2" id="text-orgcd3052f">
+<div id="outline-container-org783b91e" class="outline-2">
+<h2 id="org783b91e">Установка go, gopls и goimport</h2>
+<div class="outline-text-2" id="text-org783b91e">
 <p>
 Открываем консоль в emacs - <code>M-x shell</code>.
 </p>
 </div>
-<div id="outline-container-org15c9e25" class="outline-3">
-<h3 id="org15c9e25">go</h3>
-<div class="outline-text-3" id="text-org15c9e25">
+<div id="outline-container-org7e21ca6" class="outline-3">
+<h3 id="org7e21ca6">go</h3>
+<div class="outline-text-3" id="text-org7e21ca6">
 <p>
 В первую очередь нужно установить сам go. Если go установлен - шаг пропускаем.
 Если нет - устанавливаем по инструкции под свою платформу <a href="https://go.dev/doc/install">https://go.dev/doc/install</a>
@@ -313,9 +249,9 @@ C-x f /sudo::/etc/profile
 </div>
 </div>
 </div>
-<div id="outline-container-org8ad17a6" class="outline-3">
-<h3 id="org8ad17a6">gopls</h3>
-<div class="outline-text-3" id="text-org8ad17a6">
+<div id="outline-container-org28b20a5" class="outline-3">
+<h3 id="org28b20a5">gopls</h3>
+<div class="outline-text-3" id="text-org28b20a5">
 <p>
 Во вторую очередь (но не менее важно) нам понадобится language-server для go - <a href="https://github.com/golang/tools/tree/master/gopls">gopls</a>.
 </p>
@@ -328,14 +264,14 @@ C-x f /sudo::/etc/profile
 добавляем в <code>~/.profile</code>
 </p>
 <div class="org-src-container">
-<pre class="src src-shell"><span style="font-weight: bold;">export</span> <span style="font-weight: bold; font-style: italic;">PATH</span>=$<span style="font-weight: bold; font-style: italic;">PATH</span>:$(go env GOPATH)/bin
+<pre class="src src-shell"><span style="font-weight: bold;">export</span> <span style="font-weight: bold; font-style: italic;">PATH</span>=$<span style="font-weight: bold; font-style: italic;">PATH</span>:$(<span style="font-weight: bold;">go env GOPATH</span>)/bin
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org55a731c" class="outline-3">
-<h3 id="org55a731c">goimport</h3>
-<div class="outline-text-3" id="text-org55a731c">
+<div id="outline-container-orgd6ff417" class="outline-3">
+<h3 id="orgd6ff417">goimport</h3>
+<div class="outline-text-3" id="text-orgd6ff417">
 <p>
 И в третью очередь нам понадобится <a href="https://pkg.go.dev/golang.org/x/tools/cmd/goimports">goimports</a>.
 Пишем в консоли
@@ -350,9 +286,9 @@ C-x f /sudo::/etc/profile
 </div>
 </div>
 </div>
-<div id="outline-container-orgd0a2612" class="outline-2">
-<h2 id="orgd0a2612">go-mode и eglot</h2>
-<div class="outline-text-2" id="text-orgd0a2612">
+<div id="outline-container-org00d57a9" class="outline-2">
+<h2 id="org00d57a9">go-mode и eglot</h2>
+<div class="outline-text-2" id="text-org00d57a9">
 <p>
 Устанавливаем пакеты:
 </p>
@@ -381,20 +317,20 @@ C-x f /sudo::/etc/profile
 (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">use-package</span>)
 (<span style="font-weight: bold;">setq</span> use-package-always-ensure t)
 
-(use-package yasnippet
+(<span style="font-weight: bold;">use-package</span> yasnippet
   <span style="font-weight: bold;">:config</span> (yas-global-mode 1))
 
-(use-package yasnippet-snippets
+(<span style="font-weight: bold;">use-package</span> yasnippet-snippets
   <span style="font-weight: bold;">:after</span> yasnippet)
 
-(use-package company
+(<span style="font-weight: bold;">use-package</span> company
   <span style="font-weight: bold;">:hook</span> (prog-mode . company-mode))
 
-(use-package eglot
+(<span style="font-weight: bold;">use-package</span> eglot
   <span style="font-weight: bold;">:hook</span> (go-mode . eglot-ensure)
   <span style="font-weight: bold;">:after</span> (yasnippet company))
 
-(use-package go-mode
+(<span style="font-weight: bold;">use-package</span> go-mode
   <span style="font-weight: bold;">:init</span>
   (<span style="font-weight: bold;">setq</span> gofmt-command <span style="font-style: italic;">"goimports"</span>)
   <span style="font-weight: bold;">:hook</span> ((before-save . gofmt-before-save)
@@ -416,9 +352,9 @@ C-x f /sudo::/etc/profile
 </div>
 </div>
 
-<div id="outline-container-orgf4e68e9" class="outline-2">
-<h2 id="orgf4e68e9">Разное удобство</h2>
-<div class="outline-text-2" id="text-orgf4e68e9">
+<div id="outline-container-orgba1330c" class="outline-2">
+<h2 id="orgba1330c">Разное удобство</h2>
+<div class="outline-text-2" id="text-orgba1330c">
 <p>
 Перечисленные ниже пакеты и настройки не относятся напрямую к go,
 но всячески упрощают написание кода.
@@ -450,7 +386,7 @@ elisp-кода, но и для go пригодится, а почему бы и 
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(electric-pair-mode 1)
 
-(use-package rainbow-delimiters
+(<span style="font-weight: bold;">use-package</span> rainbow-delimiters
   <span style="font-weight: bold;">:hook</span> (prog-mode . rainbow-delimiters-mode))
 
 (<span style="font-weight: bold;">setq</span> compilation-ask-about-save nil)
@@ -459,16 +395,16 @@ elisp-кода, но и для go пригодится, а почему бы и 
 </div>
 </div>
 
-<div id="outline-container-orgcf8666d" class="outline-2">
-<h2 id="orgcf8666d">go-playground</h2>
-<div class="outline-text-2" id="text-orgcf8666d">
+<div id="outline-container-orge55764d" class="outline-2">
+<h2 id="orge55764d">go-playground</h2>
+<div class="outline-text-2" id="text-orge55764d">
 <p>
 <a href="https://github.com/grafov/go-playground">https://github.com/grafov/go-playground</a>
 Просто пакет позволяющий выполнять маленькие куски кода,
 аналогично сайту <a href="https://go.dev/play/">Go Playground</a>, но только локально.
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(use-package go-playground)
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> go-playground)
 </pre>
 </div>
 
@@ -480,45 +416,45 @@ elisp-кода, но и для go пригодится, а почему бы и 
 </p>
 </div>
 </div>
-<div id="outline-container-orgc07614d" class="outline-2">
-<h2 id="orgc07614d">Тестирование</h2>
-<div class="outline-text-2" id="text-orgc07614d">
+<div id="outline-container-orge47d688" class="outline-2">
+<h2 id="orge47d688">Тестирование</h2>
+<div class="outline-text-2" id="text-orge47d688">
 <p>
 Для тестирования установим пакет <a href="https://github.com/nlamirault/gotest.el">gotest</a>
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(use-package gotest)
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> gotest)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgfb2b145" class="outline-2">
-<h2 id="orgfb2b145">Hydra</h2>
-<div class="outline-text-2" id="text-orgfb2b145">
+<div id="outline-container-orgf82be8f" class="outline-2">
+<h2 id="orgf82be8f">Hydra</h2>
+<div class="outline-text-2" id="text-orgf82be8f">
 <p>
 <a href="https://github.com/abo-abo/hydra">Hydra</a> - пакет emacs, позволяющий настраивать собственные комбинации
 сочетаний клавиш. Добавим такой сниппет:
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(use-package hydra
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> hydra
   <span style="font-weight: bold;">:defer</span> 2
   <span style="font-weight: bold;">:bind</span> (<span style="font-weight: bold;">:map</span> go-mode-map
          (<span style="font-style: italic;">"&lt;f8&gt;"</span> . hydra-go/body))
   <span style="font-weight: bold;">:config</span>
   (defhydra hydra-go (<span style="font-weight: bold;">:color</span> blue)
-    <span style="font-style: italic;">"</span>
-<span style="font-style: italic;">    ^</span>
-<span style="font-style: italic;">    ^Code^                  ^Folding^         ^Test^</span>
-<span style="font-style: italic;">    ^&#9472;&#9472;&#9472;&#9472;&#9472;^&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;^&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;^&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;^&#9472;&#9472;&#9472;&#9472;&#9472;^&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;</span>
-<span style="font-style: italic;">    _c_ code actions        _f_ fold          _t_ file</span>
-<span style="font-style: italic;">    _r_ rename              _s_ unfold        _T_ project</span>
-<span style="font-style: italic;">    _q_ quit                _F_ fold all      _b_ benchmark file</span>
-<span style="font-style: italic;">    _d_ buffer diagnostics  _S_ unfold all    _B_ benchmark project</span>
-<span style="font-style: italic;">    _D_ project diagnostics</span>
-<span style="font-style: italic;">    _h_ doc</span>
-<span style="font-style: italic;">    _H_ doc buffer</span>
-<span style="font-style: italic;">    ^^</span>
-<span style="font-style: italic;">    "</span>
+    <span style="font-style: italic;">"
+    ^
+    ^Code^                  ^Folding^         ^Test^
+    ^&#9472;&#9472;&#9472;&#9472;&#9472;^&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;^&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;^&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;^&#9472;&#9472;&#9472;&#9472;&#9472;^&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
+    _c_ code actions        _f_ fold          _t_ file
+    _r_ rename              _s_ unfold        _T_ project
+    _q_ quit                _F_ fold all      _b_ benchmark file
+    _d_ buffer diagnostics  _S_ unfold all    _B_ benchmark project
+    _D_ project diagnostics
+    _h_ doc
+    _H_ doc buffer
+    ^^
+    "</span>
     (<span style="font-style: italic;">"c"</span> eglot-code-actions)
     (<span style="font-style: italic;">"r"</span> eglot-rename)
     (<span style="font-style: italic;">"d"</span> flymake-show-buffer-diagnostics)
@@ -575,24 +511,24 @@ elisp-кода, но и для go пригодится, а почему бы и 
 </ul>
 
 
-<div class="figure">
+<div id="org9ed31b6" class="figure">
 <p><img src="../static/go-mode/hydra.png" alt="hydra.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgcb292f7" class="outline-2">
-<h2 id="orgcb292f7">Отладка</h2>
-<div class="outline-text-2" id="text-orgcb292f7">
+<div id="outline-container-org0985062" class="outline-2">
+<h2 id="org0985062">Отладка</h2>
+<div class="outline-text-2" id="text-org0985062">
 <p>
 Я особо не пользовался отладкой под Go, но на будущее
 набросал небольшой конфиг. Может быть уточню его позже когда-нибудь.
 </p>
 </div>
-<div id="outline-container-org727c475" class="outline-3">
-<h3 id="org727c475">Отладчик devle</h3>
-<div class="outline-text-3" id="text-org727c475">
+<div id="outline-container-orgfc615f0" class="outline-3">
+<h3 id="orgfc615f0">Отладчик devle</h3>
+<div class="outline-text-3" id="text-orgfc615f0">
 <p>
 Устанавливаем отладчик <a href="https://github.com/go-delve/delve">delve</a>
 </p>
@@ -602,14 +538,14 @@ elisp-кода, но и для go пригодится, а почему бы и 
 </div>
 </div>
 </div>
-<div id="outline-container-orgf829e40" class="outline-3">
-<h3 id="orgf829e40">go-dlv</h3>
-<div class="outline-text-3" id="text-orgf829e40">
+<div id="outline-container-orgb0a5fd0" class="outline-3">
+<h3 id="orgb0a5fd0">go-dlv</h3>
+<div class="outline-text-3" id="text-orgb0a5fd0">
 <p>
 Добавляем пакет <a href="https://github.com/benma/go-dlv.el">go-dlv</a>
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(use-package go-dlv)
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> go-dlv)
 </pre>
 </div>
 <p>
@@ -617,9 +553,9 @@ elisp-кода, но и для go пригодится, а почему бы и 
 </p>
 </div>
 </div>
-<div id="outline-container-orgd328e80" class="outline-3">
-<h3 id="orgd328e80">Использование отладки</h3>
-<div class="outline-text-3" id="text-orgd328e80">
+<div id="outline-container-org9f199a8" class="outline-3">
+<h3 id="org9f199a8">Использование отладки</h3>
+<div class="outline-text-3" id="text-org9f199a8">
 <p>
 Запускаем отладчик командой <code>M-x dlv</code>, соглашаемся с предложенной в минибуфере командой.
 </p>
